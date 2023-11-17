@@ -1,0 +1,32 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "My Application",
+ 
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasharibYazdani/React.git"
+  },
+  "author": "Masharib",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MasharibYazdani/React/issues"
+  },
+  "homepage": "https://github.com/MasharibYazdani/React#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
