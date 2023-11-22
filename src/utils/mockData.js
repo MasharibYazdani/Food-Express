@@ -1,8 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-// const heading = <h1 id="heading">Masharib Yazdani</h1>;
-
 const restList = [
   {
     info: {
@@ -1703,75 +1698,4 @@ const restList = [
   },
 ];
 
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://cdn.shortpixel.ai/spai/q_lossy+ex_1+ret_img+to_webp/healthyfoodafrica.eu/wp-content/uploads/4.png"
-        />
-      </div>
-
-      <div className="nav-container">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const RestaurantCard = (props) => {
-  const { restData } = props;
-
-  const { name, cuisines, avgRating, cloudinaryImageId } = restData.info;
-  // restData?.info (If above doesn't work this may work)
-
-  const { deliveryTime } = restData.info.sla;
-  //restData?.info.?.sla (If above doesn't work then this may work)
-
-  return (
-    <div className="res-card">
-      <img
-        className="card-logo"
-        alt="image"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating} stars</h4>
-      <h4>{deliveryTime} minutes</h4>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">Search</div>
-      <div className="res-container">
-        {restList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const App = () => (
-  <div className="App">
-    <Header />
-    <Body />
-  </div>
-);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<App />);
+export default restList;
