@@ -1,15 +1,64 @@
-import { useState } from "react";
-import restList from "../utils/mockData";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
+import ShimmerUI from "./ShimmerUI";
 
 const Body = () => {
-  const [restaurants, setRestaurants] = useState(restList);
+  const [restaurants, setRestaurants] = useState([]);
+
+  const [originalData, setOriginalData] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
 
   // const filterRes =
 
-  return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139391&lng=77.2090212&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const json = await data.json();
+
+    const rData =
+      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+    if (rData) {
+      setRestaurants(rData);
+      setOriginalData(rData);
+    }
+  };
+
+  return originalData.length === 0 ? (
+    <ShimmerUI />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search-cont">
+          <input
+            type="text"
+            placeholder="Enter the text here"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="search-btn"
+            onClick={() => {
+              const filterdRes = originalData.filter((x) =>
+                x.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              if (filterdRes) {
+                setRestaurants(filterdRes);
+              }
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {

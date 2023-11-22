@@ -28,10 +28,10 @@
 }
 
 .res-card {
-    background-color: rgb(221, 209, 191);
+    background-color: rgb(240, 237, 233);
     padding: 5px;
     width: 200px;
-    /* height: 400px; */
+    height: 450px;
     margin: 10px;
     flex-basis: 22.5%;
 }
@@ -43,9 +43,40 @@
 
 .card-logo {
     width: 100%;
-    height: 60%;
+    height: 40%;
 }
 
 .filter-btn {
-    margin-top: 10px;
+    margin: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.shimmer-cont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    background-color: rgb(240, 237, 233);
+    padding: 5px;
+    width: 200px;
+    height: 450px;
+    margin: 10px;
+    flex-basis: 22.5%;
+}
+
+.login-btn{
+    width: 80px;
+    margin: 0 20px;
+    cursor: pointer;
+
+}
+
+.filter{
+    display: flex;
+} 
+
+.search-btn{
+    margin: 10px;    
 }
