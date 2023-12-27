@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -9,25 +10,27 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
-  // const filterRes =
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139391&lng=77.2090212&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139391&lng=77.2090212&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
 
-    const json = await data.json();
+      const json = await data.json();
 
-    const rData =
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      const rData =
+        json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
 
-    if (rData) {
-      setRestaurants(rData);
-      setOriginalData(rData);
+      //To handle the error when data is not defined or data is not fetching properly
+      setRestaurants(rData || []);
+      setOriginalData(rData || []);
+    } catch (error) {
+      console.log("Error while fetching home page : " + error);
     }
   };
 
@@ -71,7 +74,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restData={restaurant} />
+          <Link
+            to={"/restaurant/" + restaurant.info.id}
+            key={restaurant.info.id}
+          >
+            <RestaurantCard restData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

@@ -4,11 +4,9 @@ const RestaurantCard = (props) => {
   const { restData } = props;
 
   const { name, cuisines, avgRating, cloudinaryImageId, costForTwo } =
-    restData.info;
-  // restData?.info (If above doesn't work this may work)
+    restData?.info;
 
-  const { deliveryTime } = restData.info.sla;
-  //restData?.info.?.sla (If above doesn't work then this may work)
+  const { deliveryTime } = restData?.info?.sla;
 
   return (
     <div className="res-card">
