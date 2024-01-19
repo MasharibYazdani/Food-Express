@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext.js";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -9,6 +10,8 @@ const Body = () => {
   const [originalData, setOriginalData] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -72,7 +75,18 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+
+        <div>
+          <input
+            className="border border-black"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+        </div>
       </div>
+
       <div className="flex flex-wrap justify-around">
         {restaurants.map((restaurant) => (
           <Link

@@ -1,8 +1,6 @@
 import { IMG_LINK } from "../utils/constants";
 
 const ItemList = ({ items }) => {
-  console.log(items);
-
   return (
     <div>
       <ul>
@@ -24,7 +22,13 @@ const ItemList = ({ items }) => {
                     Add +{" "}
                   </button>
                 </div>
-                <img src={IMG_LINK + item.card.info.imageId} />
+
+                <div>
+                  <img
+                    className="border border-gray-300 rounded-md"
+                    src={IMG_LINK + item.card.info.imageId}
+                  />
+                </div>
               </div>
             </div>
           </li>

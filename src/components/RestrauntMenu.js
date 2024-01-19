@@ -4,11 +4,16 @@ import { IMG_LINK } from "../utils/constants";
 
 import { useParams } from "react-router-dom";
 import RestaurantCategories from "./RestaurantCategories";
+import { useState } from "react";
 
 function RestrauntMenu() {
   const { resId } = useParams();
 
   const resMenu = useRestaurantMenu(resId);
+
+  const [click, setClick] = useState(null);
+
+  // const [collapse, setCollapse] = useState(true);
 
   if (resMenu === null) {
     return <ShimmerUI />;
@@ -40,10 +45,12 @@ function RestrauntMenu() {
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
 
-      {categories.map((category) => (
+      {categories.map((category, index) => (
         <RestaurantCategories
           key={category.card.card.title}
           data={category.card.card}
+          click={index === click && true}
+          setClick={() => setClick(index)}
         />
       ))}
     </div>
