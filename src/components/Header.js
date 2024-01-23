@@ -1,23 +1,23 @@
 import { useContext, useState } from "react";
 import { LOGO_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
-import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
 
-  const { loggedInUser } = useContext(UserContext);
-
-  // console.log("Header rendered");
-
-  // useEffect(() => {
-  //   console.log("UseEffect called");
-  // }, [loginBtn]);
-
   //Subscribing to the store using Selector
 
   const cartItems = useSelector((store) => store.cart.items);
+
+  const calculateTotalItmes = () => {
+    let count = 0;
+    cartItems.forEach((item) => {
+      count += item.quantity;
+    });
+
+    return count;
+  };
 
   return (
     <div className="flex justify-between  bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 h-24 shadow-lg">
@@ -45,7 +45,7 @@ const Header = () => {
             <Link to="/contact">Contact Us</Link>
           </li>
           <li className="mx-3 mr-5 text-white font-serif text-xl">
-            <Link to="/cart">Cart ({cartItems.length} items)</Link>
+            <Link to="/cart">Cart ({calculateTotalItmes()})</Link>
           </li>
 
           <li className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-2 px-4 rounded-md shadow-md">
@@ -58,10 +58,6 @@ const Header = () => {
             >
               {loginBtn}
             </button>
-          </li>
-
-          <li className="mx-3 mr-5 font-serif text-xl font-bold">
-            {loggedInUser}
           </li>
         </ul>
       </div>

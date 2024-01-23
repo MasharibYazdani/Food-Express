@@ -7,11 +7,29 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      state.items.push(action.payload);
+      const isExist = state.items.find(
+        (item) => item.card.info.id === action.payload.card.info.id
+      );
+
+      if (isExist) {
+        // If item already exists, increment the quantity
+        isExist.quantity += 1;
+      } else {
+        // If item doesn't exist, add it with quantity 1
+        state.items.push({ ...action.payload, quantity: 1 });
+      }
     },
 
-    removeItem: (state) => {
-      state.items.pop();
+    removeItem: (state, action) => {
+      const itemId = action.payload.card.info.id;
+
+      state.items = state.items.map((item) =>
+        item.card.info.id === itemId
+          ? { ...item, quantity: item.quantity - 1 } // Decrease quantity
+          : item
+      );
+
+      state.items = state.items.filter((item) => item.quantity > 0);
     },
 
     clearCart: (state) => {

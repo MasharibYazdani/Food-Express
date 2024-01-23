@@ -1,7 +1,5 @@
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import ShimmerUI from "./ShimmerUI";
-import { IMG_LINK } from "../utils/constants";
-
 import { useParams } from "react-router-dom";
 import RestaurantCategories from "./RestaurantCategories";
 import { useState } from "react";
@@ -11,20 +9,28 @@ function RestrauntMenu() {
 
   const resMenu = useRestaurantMenu(resId);
 
-  const [click, setClick] = useState(null);
+  console.log(resMenu);
 
-  // const [collapse, setCollapse] = useState(true);
+  const [click, setClick] = useState(null);
 
   if (resMenu === null) {
     return <ShimmerUI />;
   }
 
-  const { name, areaName, cuisines, avgRating, costForTwoMessage } =
-    resMenu?.data?.cards[0]?.card?.card?.info;
+  const {
+    name,
+    cuisines,
+    costForTwoMessage,
+    city,
+    avgRating,
+    locality,
+    totalRatings,
+    areaName,
+  } = resMenu?.data?.cards[0]?.card?.card?.info;
 
-  const { itemCards } =
-    resMenu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card;
+  const { message } = resMenu?.data?.cards[0]?.card?.card?.info.feeDetails;
+
+  const { deliveryTime } = resMenu?.data?.cards[0]?.card?.card?.info.sla;
 
   const categories =
     resMenu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -36,24 +42,44 @@ function RestrauntMenu() {
       }
     );
 
-  // console.log(categories);
-
   return (
-    <div className="text-center">
-      <h1 className="text-2xl my-4 font-bold">{name}</h1>
-      <p className="font-bold text-m">
-        {cuisines.join(", ")} - {costForTwoMessage}
-      </p>
+    <>
+      <div className="text-center w-6/12 mx-auto">
+        <div className="text-start mt-4 flex justify-between">
+          <div>
+            <h1 className="text-2xl  font-bold ">{name}</h1>
+            <p>{cuisines.join(", ")}</p>
+            <p className="text-sm my-1 ">
+              {areaName} {locality}, {city}
+            </p>
 
-      {categories.map((category, index) => (
-        <RestaurantCategories
-          key={category.card.card.title}
-          data={category.card.card}
-          click={index === click && true}
-          setClick={() => setClick(index)}
-        />
-      ))}
-    </div>
+            <p className="text-xs my-1 ">{message}</p>
+
+            <p className="font-bold text-md my-4 ">
+              {deliveryTime} mins | {costForTwoMessage}
+            </p>
+          </div>
+
+          <div className="my-3">
+            <h4 className=" p-1 bg-green-600 rounded-md text-white">
+              {avgRating} ⭐
+            </h4>
+            <p className="text-xs">{totalRatings}+ ratings</p>
+          </div>
+        </div>
+
+        <hr></hr>
+
+        {categories.map((category, index) => (
+          <RestaurantCategories
+            key={category.card.card.title}
+            data={category.card.card}
+            click={index === click}
+            setClick={() => setClick(index === click ? null : index)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
