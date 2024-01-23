@@ -44,40 +44,42 @@ function RestrauntMenu() {
 
   return (
     <>
-      <div className="text-center w-6/12 mx-auto">
-        <div className="text-start mt-4 flex justify-between">
-          <div>
-            <h1 className="text-2xl  font-bold ">{name}</h1>
-            <p>{cuisines.join(", ")}</p>
-            <p className="text-sm my-1 ">
-              {areaName} {locality}, {city}
-            </p>
+      <div className="border border-gray-300 bg-cyan-50 min-h-screen">
+        <div className="text-center w-6/12 mx-auto">
+          <div className="text-start mt-4 flex justify-between">
+            <div>
+              <h1 className="text-2xl  font-bold ">{name}</h1>
+              <p>{cuisines.join(", ")}</p>
+              <p className="text-sm my-1 ">
+                {areaName} {locality}, {city}
+              </p>
 
-            <p className="text-xs my-1 ">{message}</p>
+              <p className="text-xs my-1 ">{message}</p>
 
-            <p className="font-bold text-md my-4 ">
-              {deliveryTime} mins | {costForTwoMessage}
-            </p>
+              <p className="font-bold text-md my-4 ">
+                {deliveryTime} mins | {costForTwoMessage}
+              </p>
+            </div>
+
+            <div className="my-3 text-center">
+              <h4 className=" p-1 bg-green-600 rounded-md text-white">
+                {avgRating} ⭐
+              </h4>
+              <p className="text-xs">{totalRatings}+ ratings</p>
+            </div>
           </div>
 
-          <div className="my-3">
-            <h4 className=" p-1 bg-green-600 rounded-md text-white">
-              {avgRating} ⭐
-            </h4>
-            <p className="text-xs">{totalRatings}+ ratings</p>
-          </div>
+          <hr></hr>
+
+          {categories.map((category, index) => (
+            <RestaurantCategories
+              key={category.card.card.title}
+              data={category.card.card}
+              click={index === click}
+              setClick={() => setClick(index === click ? null : index)}
+            />
+          ))}
         </div>
-
-        <hr></hr>
-
-        {categories.map((category, index) => (
-          <RestaurantCategories
-            key={category.card.card.title}
-            data={category.card.card}
-            click={index === click}
-            setClick={() => setClick(index === click ? null : index)}
-          />
-        ))}
       </div>
     </>
   );

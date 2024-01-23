@@ -7,7 +7,7 @@ const RestaurantCategories = ({ data, click, setClick }) => {
   };
 
   return (
-    <div className=" bg-gray-100 p-4 shadow-lg rounded-md">
+    <div className=" bg-gray-100 my-2 p-3 shadow-lg rounded-md ">
       <div
         className="flex justify-between cursor-pointer"
         onClick={handleClick}
