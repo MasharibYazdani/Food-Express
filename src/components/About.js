@@ -29,7 +29,7 @@ const About = () => {
         <h3 className="mt-4 font-mono font-bold text-start">
           Discover the Heartbeat of Delhi's Cuisine:
         </h3>
-        <p className="text-start">
+        <p className="text-justify">
           Journey through the narrow alleys of Chandni Chowk with our curated
           selection of street food, featuring the legendary chaats, kebabs, and
           sweets that have become synonymous with the city's culinary identity.
@@ -41,7 +41,7 @@ const About = () => {
         <h3 className="mt-4 font-mono font-bold text-start">
           Your Culinary Adventure Awaits:
         </h3>
-        <p className="text-start">
+        <p className="text-justify">
           No matter where you are in New Delhi – the bustling Connaught Place,
           the historic lanes of Daryaganj, or the serene neighborhoods of Vasant
           Kunj – we're here to make your dining experience seamless and
@@ -51,7 +51,7 @@ const About = () => {
         </p>
 
         <h3 className="mt-4 font-mono font-bold text-start">How to Indulge:</h3>
-        <p className="text-start">
+        <p className="text-justify">
           Explore our platform to discover the diverse offerings from local
           favorites to renowned establishments. Place orders effortlessly with
           our user-friendly interface, allowing you to customize your meals and

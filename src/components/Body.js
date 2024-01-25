@@ -25,7 +25,7 @@ const Body = () => {
             }}
           />
           <button
-            className="mx-3 bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded "
+            className="mx-3 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded "
             onClick={() => {
               const filterdRes = originalData.filter((x) =>
                 x.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -39,7 +39,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="mx-3 bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded"
+          className="mx-3 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded"
           onClick={() => {
             const result = restaurants.filter((x) => x.info.avgRating > 4.1);
             setRestaurants(result);

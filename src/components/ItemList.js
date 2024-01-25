@@ -28,7 +28,9 @@ const ItemList = ({ items }) => {
                     {item.card.info.price / 100 ||
                       item.card.info.defaultPrice / 100}
                   </p>
-                  <p className="text-xs mt-2">{item.card.info.description}</p>
+                  <p className="text-xs mt-2 text-justify">
+                    {item.card.info.description}
+                  </p>
                 </div>
                 <div className="w-3/12 p-4">
                   <div>
@@ -39,7 +41,7 @@ const ItemList = ({ items }) => {
                   </div>
                   <div>
                     <button
-                      className="p-2 bg-yellow-500 border border-black text-sm rounded-lg "
+                      className="p-2 bg-red-500 hover:bg-red-600 text-sm rounded-lg text-white"
                       onClick={() => handleAddItem(item)}
                     >
                       Add +{" "}

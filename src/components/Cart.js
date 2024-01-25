@@ -12,6 +12,9 @@ const Cart = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+    toast.warn("Cart Cleared !", {
+      position: "top-center",
+    });
   };
 
   const handleRemoveItem = (item) => {
@@ -56,7 +59,7 @@ const Cart = () => {
           <div className="">
             <div className="text-end mx-9">
               <button
-                className="m-1 p-2 rounded-md bg-red-500 text-white "
+                className="m-1 p-2 rounded-md bg-red-500 text-white hover:bg-red-600 "
                 onClick={handleClearCart}
               >
                 {" "}
@@ -66,14 +69,16 @@ const Cart = () => {
           </div>
 
           {cartItems.length === 0 ? (
-            <h1 className=" mt-10">
-              Your cart is empty! Please add items in your cart
+            <h1 className=" mt-10 font-mono font-lg">
+              Your cart is empty! Please add items in your cart.
             </h1>
           ) : (
             <div>
               <div className="">
                 <h1 className="text-start mx-5 font-semibold">
-                  {calculateTotalItmes()} Itmes{" "}
+                  {calculateTotalItmes() === 1
+                    ? `${calculateTotalItmes()} Item`
+                    : `${calculateTotalItmes()} Items`}
                 </h1>
               </div>
 
@@ -92,7 +97,7 @@ const Cart = () => {
                               (item.quantity * item.card.info.defaultPrice) /
                                 100}
                           </p>
-                          <p className="text-xs mt-2">
+                          <p className="text-xs mt-2 text-justify">
                             {item.card.info.description}
                           </p>
                         </div>
@@ -106,7 +111,7 @@ const Cart = () => {
                           <div className="flex justify-around ">
                             <div>
                               <button
-                                className="p-2 w-8 bg-yellow-500 border border-black text-sm rounded-lg "
+                                className="p-2 w-8 text-white bg-red-500 hover:bg-red-600  text-sm rounded-lg "
                                 onClick={() => handleAddItem(item)}
                               >
                                 +{" "}
@@ -117,7 +122,7 @@ const Cart = () => {
 
                             <div>
                               <button
-                                className="p-2 w-8  text-sm rounded-lg bg-yellow-500 border border-black"
+                                className="p-2 w-8 text-white text-sm rounded-lg bg-red-500 hover:bg-red-600 "
                                 onClick={() => handleRemoveItem(item)}
                               >
                                 –{" "}
@@ -142,7 +147,7 @@ const Cart = () => {
                   <div>₹ {calculateTotalPrice()}</div>
                 </div>
 
-                <button className="m-2 p-2 bg-green-500 text-white rounded-md ">
+                <button className="m-2 p-2 bg-green-500 text-white rounded-md hover:bg-green-600">
                   Place Order
                 </button>
               </div>
